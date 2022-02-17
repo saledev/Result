@@ -38,7 +38,7 @@ namespace saledev.Result.AspNetCore
         {
             switch (result.Status)
             {
-                case ResultStatus.Ok: return controller.Ok(result.GetValue());
+                case ResultStatus.Ok: return controller.Ok(GetValueFromResult(result));
                 case ResultStatus.NotFound: return controller.NotFound();
                 case ResultStatus.Unauthorized: return controller.Unauthorized();
                 case ResultStatus.Forbidden: return controller.Forbid();
@@ -47,6 +47,17 @@ namespace saledev.Result.AspNetCore
                 default:
                     throw new NotSupportedException($"Result {result.Status} conversion is not supported.");
             }
+        }
+
+        private static object GetValueFromResult(IResult result)
+        {
+            var pagedInfo = result.GetPagedInfo();
+            if(pagedInfo != null)
+            {
+                return new { PagedInfo = pagedInfo, ResultList = result.GetValue() };
+            }
+
+            return result.GetValue();
         }
 
         private static ActionResult BadRequest(ControllerBase controller, IResult result)

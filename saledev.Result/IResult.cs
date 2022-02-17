@@ -10,5 +10,6 @@ namespace saledev.Result
         List<ValidationError> ValidationErrors { get; }
         Type ValueType { get; }
         Object GetValue();
+        PagedInfo GetPagedInfo();
     }
 }

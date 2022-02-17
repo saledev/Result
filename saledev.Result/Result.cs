@@ -60,6 +60,11 @@ namespace saledev.Result
             return pagedResult;
         }
 
+        public virtual PagedInfo GetPagedInfo()
+        {
+            return null;
+        }
+
         /// <summary>
         /// Represents a successful operation and accepts a values as the result of the operation
         /// </summary>

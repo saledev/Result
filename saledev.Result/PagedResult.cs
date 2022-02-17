@@ -8,5 +8,10 @@
         }
 
         public PagedInfo PagedInfo { get; }
+
+        public override PagedInfo GetPagedInfo()
+        {
+            return PagedInfo;
+        }
     }
 }
